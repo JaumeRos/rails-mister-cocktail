@@ -1,0 +1,10 @@
+<h1> Title: <%= @cocktails.name %></h1>
+
+<h2>These are the doses:</h2>
+<ul class="list-group">
+  <% @cocktails.doses.each do |dose| %>
+    <li class="list-group-item"><%= dose.description %> <%= dose.ingredient.name %></li>
+  <% end %>
+</ul>
+<h3>Add a dose damn it: <%= link_to "New Dose", new_cocktail_dose_path(@cocktails) %> </h3>
+<h3> <%= link_to "Home", cocktails_path %> </h3>
