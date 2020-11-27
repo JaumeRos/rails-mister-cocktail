@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # get "cocktails/new", to: "cocktails#new"
   # get "cocktails/:id", to: "cocktails#show", as: :cocktail
   # post "cocktails", to: "cocktails#create"
+  root to: 'cocktails#index'
   resources :cocktails, only: [:index, :new, :show, :create] do
     resources :doses, only: [:new,:create]
   end
