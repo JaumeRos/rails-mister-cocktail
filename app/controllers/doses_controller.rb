@@ -1,17 +1,27 @@
 class DosesController < ApplicationController
   def new
     @cocktail = Cocktail.find(params[:cocktail_id])
-    @doses = Dose.new
+    @dose = Dose.new
   end
 
   def create
-    @doses = Dose.new(doses_params)
+    @dose = Dose.new(doses_params)
     # we need `restaurant_id` to associate review with corresponding restaurant
     @cocktail = Cocktail.find(params[:cocktail_id])
-    @doses.cocktail = @cocktail
-    @doses.save
+    @dose.cocktail = @cocktail
+    if @dose.save
+       redirect_to cocktail_path(@cocktail)
+         else
+          render :new
+         end
+  end
 
-    redirect_to cocktail_path(@cocktail)
+  def destroy
+    @dose = Dose.find(params[:id])
+    @dose.destroy
+
+    # no need for app/views/restaurants/destroy.html.erb
+    redirect_to cocktails_path
   end
 
   private
@@ -21,5 +31,3 @@ class DosesController < ApplicationController
   end
 
 end
-
-
